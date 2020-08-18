@@ -1,0 +1,96 @@
+<nav id="top">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6">
+
+      </div>
+      <div class="col-xs-6">
+        <ul class="top-link">
+          <li><a routerLink="/userAccount"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+          <li><a routerLink="/contactus"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<!--Header-->
+<header class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div id="logo"><img src="../../../assets/images/logo.png" /></div>
+    </div>
+    <div class="col-md-4">
+      <form class="form-search">
+        <input type="text" class="input-medium search-query">
+        <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <div id="cart"><a class="btn btn-1" routerLink="userCart"><span class="glyphicon glyphicon-shopping-cart"></span>CART : 0 ITEM</a></div>
+    </div>
+  </div>
+</header>
+<!--Navigation-->
+  <nav id="menu" class="navbar">
+  <div class="container">
+    <div class="navbar-header"><span id="heading" class="visible-xs">Categories</span>
+      <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/">Home</a></li>
+        <li class="dropdown"><a routerLink="/moreStuff" class="dropdown-toggle" data-toggle="dropdown">PC Computers</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-inner">
+              <ul class="list-unstyled">
+                <li><a routerLink="/moreStuff">Window</a></li>
+                <li><a routerLink="/moreStuff">MacBook</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="dropdown"><a routerLink="/moreStuff" class="dropdown-toggle" data-toggle="dropdown">Laptops &amp; Notebooks</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-inner">
+              <ul class="list-unstyled">
+                <li><a routerLink="/moreStuff">Dell</a></li>
+                <li><a routerLink="/moreStuff">Asus</a></li>
+                <li><a routerLink="/moreStuff">Samsung</a></li>
+                <li><a routerLink="/moreStuff">Lenovo</a></li>
+                <li><a routerLink="/moreStuff">Acer</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="dropdown"><a routerLink="/moreStuff" class="dropdown-toggle" data-toggle="dropdown">Mobiles &amp; Tablet</a>
+          <div class="dropdown-menu" style="margin-left: -203.625px;">
+            <div class="dropdown-inner">
+              <ul class="list-unstyled">
+                <li><a routerLink="/products">Iphone</a></li>
+                <li><a routerLink="/products">Samsung</a></li>
+                <li><a routerLink="/products">Nokia</a></li>
+                <li><a routerLink="/products">Lenovo</a></li>
+                <li><a routerLink="/products">Google</a></li>
+              </ul>
+              <ul class="list-unstyled">
+                <li><a routerLink="/products">Nexus</a></li>
+                <li><a routerLink="/products">Dell</a></li>
+                <li><a routerLink="/products">Oppo</a></li>
+                <li><a routerLink="/products">Blackberry</a></li>
+                <li><a routerLink="/products">HTC</a></li>
+              </ul>
+              <ul class="list-unstyled">
+                <li><a routerLink="/products">LG</a></li>
+                <li><a routerLink="/products">Q-Mobiles</a></li>
+                <li><a routerLink="/products">Sony</a></li>
+                <li><a routerLink="/products">Wiko</a></li>
+                <li><a routerLink="/products">T&T</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li><a routerLink="/moreStuff">Software</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
