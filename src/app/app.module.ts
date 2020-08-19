@@ -10,11 +10,26 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MoreStuffComponent } from './components/more-stuff/more-stuff.component';
 import { ProductsComponent } from './products/products.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { UserAccountComponent } from './user-account/user-account.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { UserLogOrSingComponent } from './user-log-or-sing/user-log-or-sing.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavbarComponent, FooterComponent, PageNotFoundComponent, MoreStuffComponent, ProductsComponent, ContactUsComponent, UserAccountComponent, UserCartComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    NavbarComponent,
+    FooterComponent,
+    PageNotFoundComponent,
+    MoreStuffComponent,
+    ProductsComponent,
+    ContactUsComponent,
+   UserCartComponent,
+    UserLogOrSingComponent,
+    ProductDetailsComponent,
+    TestComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
