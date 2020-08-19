@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -13,7 +14,6 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { UserLogOrSingComponent } from './user-log-or-sing/user-log-or-sing.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +25,11 @@ import { TestComponent } from './test/test.component';
     MoreStuffComponent,
     ProductsComponent,
     ContactUsComponent,
-   UserCartComponent,
+    UserCartComponent,
     UserLogOrSingComponent,
     ProductDetailsComponent,
-    TestComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

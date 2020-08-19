@@ -9,47 +9,235 @@
       </div>
     </div>
     <div class="row">
+      <!-- LOG IN FORM START-->
       <div class="col-md-6">
         <div class="heading"><h2>Login</h2></div>
-        <form name="form1" id="ff1" method="post" action="login.php">
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="login()"
+          name="form1"
+          id="ff1"
+        >
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username :" name="username" id="username" required>
+            <input
+              formControlName="email"
+              name="email"
+              type="email"
+              class="form-control"
+              placeholder="email :"
+              id="email"
+              required
+            />
+
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                loginForm.get('email').touched &&
+                !loginForm.get('email').valid &&
+                loginForm.get('email').errors.isEmail
+              "
+            >
+              <strong>Warning!</strong> email is required and email format is
+              xxx@xxx.com.
+            </div>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password :" name="email" id="email" required>
+            <input
+              formControlName="passowrd"
+              name="password"
+              type="password"
+              class="form-control"
+              placeholder="Password :"
+              id="password"
+              required
+            />
+
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                loginForm.get('passowrd').touched &&
+                !loginForm.get('passowrd').valid &&
+                loginForm.get('passowrd').errors.isPassword
+              "
+            >
+              <strong>Warning!</strong> password format can b number and
+              character and min len is and max is 8.
+            </div>
           </div>
-          <button type="submit" class="btn btn-1" name="login" id="login">Login</button>
+          <button
+            type="submit"
+            [disabled]="!loginForm.valid"
+            class="btn btn-1"
+            name="login"
+            id="login"
+          >
+            Login
+          </button>
           <a routerLink="#">Forgot Your Password ?</a>
         </form>
       </div>
+
+      <!-- SING UP FORM START-->
       <div class="col-md-6">
         <div class="heading"><h2>New User ? Create An Account.</h2></div>
-        <form name="form2" id="ff2" method="post" action="register.php">
+        <form
+          [formGroup]="singupForm"
+          (ngSubmit)="singup()"
+          name="form2"
+          id="ff2"
+        >
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="First Name :" name="firstname" id="firstname" required>
+            <input
+              formControlName="firstname"
+              name="firstname"
+              type="text"
+              class="form-control"
+              placeholder="First Name :"
+              id="firstname"
+              required
+            />
+
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                singupForm.get('firstname').touched &&
+                !singupForm.get('firstname').valid &&
+                singupForm.get('firstname').errors.isName
+              "
+            >
+              <strong>Warning!</strong> The lenght for user name is max 8
+              charcter and connot contain any number or space.
+            </div>
           </div>
           <div class="form-group">
-            <input type="email" class="form-control" placeholder="Last Name :" name="lastname" id="lastname" required>
+            <input
+              formControlName="lastname"
+              name="lastname"
+              type="email"
+              class="form-control"
+              placeholder="Last Name :"
+              id="lastname"
+              required
+            />
+
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                singupForm.get('lastname').touched &&
+                !singupForm.get('lastname').valid &&
+                singupForm.get('lastname').errors.isName
+              "
+            >
+              <strong>Warning!</strong> The lenght for user name is max 8
+              charcter and connot contain any number or space.
+            </div>
           </div>
           <div class="form-group">
-            <input type="tel" class="form-control" placeholder="Email Address :" name="email" id="email" required>
+            <input
+              formControlName="email"
+              name="email"
+              type="email"
+              class="form-control"
+              placeholder="Email Address :"
+              id="newUserEmail"
+              required
+            />
+
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                singupForm.get('email').touched &&
+                !singupForm.get('email').valid &&
+                singupForm.get('email').errors.isEmail
+              "
+            >
+              <strong>Warning!</strong> email is required and email format is
+              xxx@xxx.com.
+            </div>
           </div>
           <div class="form-group">
-            <input type="tel" class="form-control" placeholder="Mobile :" name="phone" id="phone" required>
+            <input
+              formControlName="password"
+              name="newUserPassword"
+              type="password"
+              class="form-control"
+              placeholder="Password :"
+              id="newUserPassword"
+              required
+            />
+
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                singupForm.get('password').touched &&
+                !singupForm.get('password').valid &&
+                singupForm.get('password').errors.isPassword
+              "
+            >
+              <strong>Warning!</strong> password format can b number and
+              character and min len is and max is 8.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input
+              formControlName="phone"
+              name="phone"
+              type="tel"
+              class="form-control"
+              placeholder="Mobile :"
+              id="phone"
+              required
+            />
+
+            <div
+              class="alert alert-danger"
+              *ngIf="
+                singupForm.get('phone').touched &&
+                !singupForm.get('phone').valid &&
+                singupForm.get('phone').errors.isPhoneNo
+              "
+            >
+              <strong>Warning!</strong> Excepted format is xxxxxxxxxxxx the
+              length is 11.
+            </div>
           </div>
           <div class="form-group">
-            <input name="gender" id="gender" type="radio"> Male <input name="gender" id="gender" type="radio"> Female
+            <input
+              formControlName="gender"
+              value="male"
+              name="gender"
+              required
+              type="radio"
+            />
+            Male
+            <input
+              formControlName="gender"
+              value="female"
+              name="gender"
+              required
+              type="radio"
+            />
+            Female
           </div>
+
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password :" name="password" id="password" required>
+            <input
+              formControlName="isAgree"
+              name="agree"
+              required
+              id="agree"
+              type="checkbox"
+            />
+            I agree to your website.
           </div>
-          <div class="form-group">
-            <input type="password" class="form-control" placeholder="Retype Password :" name="repassword" id="repassword" required>
-          </div>
-          <div class="form-group">
-            <input name="agree" id="agree" type="checkbox" > I agree to your website.
-          </div>
-          <button type="submit" class="btn btn-1">Create</button>
+          <button
+            type="submit"
+            class="btn btn-1"
+            [disabled]="!singupForm.valid || !singupForm.get('isAgree').valid"
+          >
+            Create
+          </button>
         </form>
       </div>
     </div>
