@@ -14,6 +14,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { UserLogOrSingComponent } from './user-log-or-sing/user-log-or-sing.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     UserCartComponent,
     UserLogOrSingComponent,
     ProductDetailsComponent,
+    PaginationComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
