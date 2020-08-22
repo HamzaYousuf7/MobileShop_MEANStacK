@@ -1,3 +1,6 @@
+import { AdminPanelUpdateProdComponent } from './Admin/admin-panel-update-prod/admin-panel-update-prod.component';
+import { AdminPanelShowComponent } from './Admin/admin-panel-show/admin-panel-show.component';
+import { AdminPanelAddNewProComponent } from './Admin/admin-panel-add-new-pro/admin-panel-add-new-pro.component';
 import { UserLogOrSingComponent } from './user-log-or-sing/user-log-or-sing.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
@@ -18,7 +21,10 @@ const routes: Routes = [
   { path: 'userCart', component: UserCartComponent },
   { path: 'userLogOrSing', component: UserLogOrSingComponent },
   { path: 'moreStuff', component: MoreStuffComponent },
-  { path: '**', component: PageNotFoundComponent },
+  { path: 'admin/showAllProducts', component: AdminPanelShowComponent }, //!admin route start
+  { path: 'admin/addNewProduct', component: AdminPanelAddNewProComponent },
+  { path: 'admin/updateProduct', component: AdminPanelUpdateProdComponent },
+  { path: '**', component: PageNotFoundComponent }, //!404 route
 ];
 
 @NgModule({

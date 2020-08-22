@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -18,6 +19,9 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { BackdropComponent } from './components/UI/backdrop/backdrop.component';
 import { ModalComponent } from './components/UI/modal/modal.component';
 import { SpinnerComponent } from './components/UI/spinner/spinner.component';
+import { AdminPanelShowComponent } from './Admin/admin-panel-show/admin-panel-show.component';
+import { AdminPanelAddNewProComponent } from './Admin/admin-panel-add-new-pro/admin-panel-add-new-pro.component';
+import { AdminPanelUpdateProdComponent } from './Admin/admin-panel-update-prod/admin-panel-update-prod.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +39,12 @@ import { SpinnerComponent } from './components/UI/spinner/spinner.component';
     PaginationComponent,
     BackdropComponent,
     ModalComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AdminPanelShowComponent,
+    AdminPanelAddNewProComponent,
+    AdminPanelUpdateProdComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
