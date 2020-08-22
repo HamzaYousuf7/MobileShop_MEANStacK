@@ -1,0 +1,16 @@
+<app-backdrop
+  [isBackdropOpen]="isModalOpen"
+  (toggleBackdropOutput)="toggleModalHandler()"
+>
+</app-backdrop>
+<div
+  class="Modal"
+  *ngIf="isModalOpen"
+  (click)="toggleModalHandler()"
+  [ngStyle]="{
+    transform: isModalOpen ? 'translateY(0)' : 'translateY(-100vh)',
+    opacity: isModalOpen ? '1' : '0'
+  }"
+>
+  <ng-content select=".children"></ng-content>
+</div>

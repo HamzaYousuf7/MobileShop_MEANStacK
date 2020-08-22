@@ -15,6 +15,9 @@ import { UserCartComponent } from './user-cart/user-cart.component';
 import { UserLogOrSingComponent } from './user-log-or-sing/user-log-or-sing.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { BackdropComponent } from './components/UI/backdrop/backdrop.component';
+import { ModalComponent } from './components/UI/modal/modal.component';
+import { SpinnerComponent } from './components/UI/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     UserCartComponent,
     UserLogOrSingComponent,
     ProductDetailsComponent,
-    PaginationComponent
+    PaginationComponent,
+    BackdropComponent,
+    ModalComponent,
+    SpinnerComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
