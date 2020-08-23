@@ -10,7 +10,9 @@ import { printMessage } from '../../components/Util//printMessageConsole.js';
   styleUrls: ['./admin-panel-add-new-pro.component.css'],
 })
 export class AdminPanelAddNewProComponent implements OnInit {
+
   constructor(private adminService: AdminService) {}
+
   public addNewProdForm: FormGroup;
   public mainImgPreview = null;
   public additionalImagesPriviews = [];
@@ -18,6 +20,7 @@ export class AdminPanelAddNewProComponent implements OnInit {
   public isLoading = false;
   public isModalOpen = false;
   public response;
+
   ngOnInit() {
     // inil form
     this.addNewProdForm = new FormGroup({
