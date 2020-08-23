@@ -7,6 +7,9 @@ export class AdminService {
   private URL = 'http://localhost:5000';
   constructor(private httpClient: HttpClient) {}
 
+  getAllProducts() {
+    return this.httpClient.get(this.URL + '/api/product?isHomePage=true');
+  }
   addNewProduct(newProduct) {
     //converting data to FORM DATA
     const formData = new FormData();
@@ -27,5 +30,9 @@ export class AdminService {
       }
     }
     return this.httpClient.post(this.URL + '/api/product', formData);
+  }
+
+  deleteProduct(productID) {
+    return this.httpClient.delete(this.URL + `/api/product/${productID}`);
   }
 }

@@ -10,7 +10,7 @@ const route = express.Router();
 
 route.get("/", productContoller.getAllProducts);
 
-route.get("/:ProductID", productContoller.getSingleProduct);
+route.get("/:productID", productContoller.getSingleProduct);
 
 route.post(
   "/",
@@ -33,7 +33,7 @@ route.post(
 );
 
 route.put(
-  "/:ProductID",
+  "/:productID",
   fileUpload.fields([
     { name: "mainImg", maxCount: 1 },
     { name: "additionalImages", maxCount: 4 },
@@ -52,6 +52,6 @@ route.put(
   productContoller.updateProduct
 );
 
-route.delete("/:ProductID", productContoller.deleteProduct);
+route.delete("/:productID", productContoller.deleteProduct);
 
 module.exports = route;

@@ -117,4 +117,28 @@ exports.addNewProduct = async (req, res, next) => {
 
 exports.updateProduct = async (req, res, next) => {};
 
-exports.deleteProduct = async (req, res, next) => {};
+exports.deleteProduct = async (req, res, next) => {
+  //VAR INI
+  let resultOfDeletion;
+  const productID = req.params.productID;
+
+  try {
+    resultOfDeletion = await Product.findByIdAndRemove(productID);
+  } catch (error) {
+    printMessage("error occur when try to delete a product", error);
+    return next(new HttpError("Could not delete  product try again ", 500));
+  }
+
+  if (!resultOfDeletion) {
+    return next(
+      new HttpError(
+        "Could not delete  product try again maybe product does not exist",
+        500
+      )
+    );
+  }
+  printMessage("result of deletion", resultOfDeletion);
+  res.status(200).json({
+    message: "successfully deleted the product",
+  });
+};

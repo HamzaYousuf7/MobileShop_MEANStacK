@@ -1,25 +1,62 @@
 <div class="container">
-  <h1>All Prodcuts:</h1>
-  <table class="table table-responsive">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Product ID</th>
-        <th>Product Name</th>
-        <th>Product Brand Name</th>
-        <th>Product Price</th>
-        <th>Product Image</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>#5454514</td>
-        <td>Redmi 9S</td>
-        <td>Remdi</td>
-        <td>$150</td>
-        <td>to b addeed</td>
-      </tr>
-    </tbody>
-  </table>
+  <app-spinner *ngIf="isLoading"></app-spinner>
+
+  <app-modal [isModalOpen]="isModalOpen" (toggleModalOutput)="closeModal()">
+    <span class="children">{{ deleteResponse }} </span>
+  </app-modal>
+
+  <div *ngIf="!isLoading && allProducts.length > 0">
+    <h1>All Prodcuts:</h1>
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product ID</th>
+          <th>Product Name</th>
+          <th>Product Brand Name</th>
+          <th>Product Price</th>
+          <th>Product Image</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of allProducts; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ product._id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.brandName }}</td>
+          <td>{{ product.price | currency: "USD":"symbol" }}</td>
+          <td>
+            <img
+              src="http://localhost:5000/{{ product.mainImg }}"
+              width="150px"
+              height="150px"
+            />
+          </td>
+          <td>
+            <button
+              style="margin-right: 10px;"
+              type="button"
+              class="btn btn-warning btn-lg"
+            >
+              UPDATE
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger btn-lg"
+              (click)="deleteProduct(product._id)"
+            >
+              DELETE
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container" *ngIf="!isLoading && allProducts.length <= 0">
+    <div class="alert alert-info">
+      <strong>Info!</strong> No product has been added yet.
+    </div>
+  </div>
 </div>

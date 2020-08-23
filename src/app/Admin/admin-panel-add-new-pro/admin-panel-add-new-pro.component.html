@@ -1,8 +1,10 @@
 <div class="container">
   <app-spinner *ngIf="isLoading"></app-spinner>
+
   <app-modal [isModalOpen]="isModalOpen" (toggleModalOutput)="closeModal()">
-    <span class="children">{{response}} </span>
+    <span class="children">{{ response }} </span>
   </app-modal>
+
   <div *ngIf="!isLoading">
     <h1>ADD NEW PRODUCT:</h1>
     <form
@@ -165,7 +167,7 @@
           <img
             [src]="mainImgPreview"
             width="150px"
-            height="100px"
+            height="150px"
             *ngIf="mainImgPreview"
           />
         </div>
@@ -187,7 +189,7 @@
           <img
             [src]="img"
             width="150px"
-            height="100px"
+            height="150px"
             *ngFor="let img of additionalImagesPriviews"
           />
           <span *ngIf="!additionalImagesPriviews">{{ inValidImagesPick }}</span>
