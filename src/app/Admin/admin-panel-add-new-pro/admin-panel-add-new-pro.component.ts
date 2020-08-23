@@ -14,8 +14,10 @@ export class AdminPanelAddNewProComponent implements OnInit {
   public addNewProdForm: FormGroup;
   public mainImgPreview = null;
   public additionalImagesPriviews = [];
-  public inValidImagesPick = 'SORRY YOU PICKED TO MANNY IMAGES';
-
+  public inValidImagesPick = 'YOU HAVE TO PICKED 4 IMAGES NO MORE NO LESS';
+  public isLoading = false;
+  public isModalOpen = false;
+  public response;
   ngOnInit() {
     // inil form
     this.addNewProdForm = new FormGroup({
@@ -31,8 +33,19 @@ export class AdminPanelAddNewProComponent implements OnInit {
   }
 
   addNewProduct() {
+    this.isLoading = true;
     printMessage('new product form me kia aya ', this.addNewProdForm.value);
-    this.adminService.addNewProduct(this.addNewProdForm.value);
+    this.adminService
+      .addNewProduct(this.addNewProdForm.value)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.isLoading = false;
+        this.isModalOpen = true;
+        this.response = res.message;
+      });
+    this.addNewProdForm.reset();
+    this.mainImgPreview = null;
+    this.additionalImagesPriviews = null;
   }
 
   pickMainImgHandler(event: Event) {
@@ -55,7 +68,7 @@ export class AdminPanelAddNewProComponent implements OnInit {
   pickAddtionallImgHandler(event: Event) {
     const images = (event.target as HTMLInputElement).files;
     printMessage('multile image me kia aya ', images);
-    if (images.length >= 5) {
+    if (images.length != 4) {
       this.additionalImagesPriviews = null; //Roll back
       return;
     }
@@ -100,5 +113,9 @@ export class AdminPanelAddNewProComponent implements OnInit {
     fileReader3.readAsDataURL(images[3]);
 
     printMessage('final resut ', this.additionalImagesPriviews);
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 }

@@ -2,7 +2,7 @@
 
 #HIDING APP .js
 /backend/app.js
-
+/backend/upload
 # compiled output
 /dist
 /tmp

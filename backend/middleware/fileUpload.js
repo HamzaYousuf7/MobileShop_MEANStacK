@@ -7,17 +7,15 @@ const MIME_TYPE_MAP = {
 };
 
 const fileUpload = multer({
-  limits: 500000,
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "uploads/images");
+      cb(null, "backend/upload/images");
     },
     filename: (req, file, cb) => {
       const fileName = file.originalname
         .toLocaleLowerCase()
         .split(" ")
         .join("-");
-
       cb(null, Date.now() + fileName);
     },
   }),
