@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'moreStuff', component: MoreStuffComponent },
   { path: 'admin/showAllProducts', component: AdminPanelShowComponent }, //!admin route start
   { path: 'admin/addNewProduct', component: AdminPanelAddNewProComponent },
-  { path: 'admin/updateProduct', component: AdminPanelUpdateProdComponent },
+  { path: 'admin/updateProduct/:productID', component: AdminPanelUpdateProdComponent },
   { path: '**', component: PageNotFoundComponent }, //!404 route
 ];
 

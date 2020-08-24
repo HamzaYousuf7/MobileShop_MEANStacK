@@ -56,7 +56,35 @@ exports.getAllProducts = async (req, res, next) => {
   });
 };
 
-exports.getSingleProduct = async (req, res, next) => {};
+exports.getSingleProduct = async (req, res, next) => {
+  //VAR INI
+  let fetchProduct;
+
+  const productID = req.params.productID;
+
+  try {
+    fetchProduct = await Product.findById(productID);
+  } catch (error) {
+    printMessage("error occur when try to fetching single  product", error);
+    return next(
+      new HttpError("Could not fetch single  product try again ", 500)
+    );
+  }
+
+  if (!fetchProduct) {
+    return next(
+      new HttpError(
+        "Could not fetch single  product try again may be product does not exist",
+        500
+      )
+    );
+  }
+  printMessage("result of fetching single product", fetchProduct);
+  res.status(200).json({
+    message: "successfully fetch single product",
+    product: fetchProduct,
+  });
+};
 
 exports.addNewProduct = async (req, res, next) => {
   //VAR INI
@@ -115,29 +143,114 @@ exports.addNewProduct = async (req, res, next) => {
   res.json({ message: "successfully added new product" });
 };
 
-exports.updateProduct = async (req, res, next) => {};
+exports.updateProduct = async (req, res, next) => {
+  //VAR INI
+  let updateProduct;
+  let mainImgPath, additionalImagesPath;
+  const productID = req.params.productID;
+
+  //VALIDATION
+  const validationRes = validationResult(req);
+  if (!validationRes.isEmpty()) {
+    let errorMessage = validationRes.errors[0].msg;
+    printMessage("Error occur in validation ", errorMessage);
+    return next(new HttpError(errorMessage, 422));
+  }
+
+  //Now fetching that product
+  try {
+    updateProduct = await Product.findById(productID);
+  } catch (error) {
+    printMessage(
+      "error occur when try to fetching single  product for update",
+      error
+    );
+    return next(new HttpError("Could not update   product try again ", 500));
+  }
+
+  //! if does not exist product
+  if (!updateProduct) {
+    return next(new HttpError("Could not update   product try again ", 500));
+  }
+
+  //! either we're going to have new image or old img path as a string
+  if (req.files) {
+    console.log("RUN 1");
+    mainImgPath = req.files.mainImg[0].path;
+    additionalImagesPath = [
+      req.files.additionalImages[0].path,
+      req.files.additionalImages[1].path,
+      req.files.additionalImages[2].path,
+      req.files.additionalImages[3].path,
+    ];
+    printMessage("what we're getting when we upload files", "");
+    console.log("main img", mainImgPath);
+    console.log("addtional  imgages", additionalImagesPath);
+  } else {
+    console.log("RUN 2");
+    mainImgPath = req.body.mainImg;
+    additionalImagesPath = req.body.additionalImages;
+    printMessage("what we're getting when we upload path ", "");
+    console.log("main img", mainImgPath);
+    console.log("addtional  imgages", additionalImagesPath);
+  }
+
+  //Extracting the body
+  const {
+    name,
+    brandName,
+    price,
+    description,
+    rating,
+    availableColor,
+  } = req.body;
+
+  //updating its value
+  updateProduct.name = name;
+  updateProduct.brandName = brandName;
+  updateProduct.price = price;
+  updateProduct.description = description;
+  updateProduct.rating = rating;
+  updateProduct.availableColor = availableColor;
+  updateProduct.mainImg = mainImgPath;
+  updateProduct.additionalImages = additionalImagesPath;
+
+  //saving into data base
+  try {
+    await updateProduct.save();
+  } catch (error) {
+    printMessage(
+      "error occur when try to fetching single  product for update",
+      error
+    );
+    return next(new HttpError("Could not update   product try again ", 500));
+  }
+
+  res.json({
+    message: "product updated successfully",
+  });
+};
 
 exports.deleteProduct = async (req, res, next) => {
   //VAR INI
-  let resultOfDeletion;
+  let deleteProduct;
   const productID = req.params.productID;
 
   try {
-    resultOfDeletion = await Product.findByIdAndRemove(productID);
+    deleteProduct = await Product.findById(productID);
+  } catch (error) {
+    printMessage("error occur when try to fetch product for deletion", error);
+    return next(new HttpError("Could not delete  product try again ", 500));
+  }
+
+  try {
+    await deleteProduct.remove();
   } catch (error) {
     printMessage("error occur when try to delete a product", error);
     return next(new HttpError("Could not delete  product try again ", 500));
   }
 
-  if (!resultOfDeletion) {
-    return next(
-      new HttpError(
-        "Could not delete  product try again maybe product does not exist",
-        500
-      )
-    );
-  }
-  printMessage("result of deletion", resultOfDeletion);
+  printMessage("result of deletion", deleteProduct);
   res.status(200).json({
     message: "successfully deleted the product",
   });

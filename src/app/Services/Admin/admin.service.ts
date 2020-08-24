@@ -11,7 +11,7 @@ export class AdminService {
     return this.httpClient.get(this.URL + '/api/product?isHomePage=true');
   }
   addNewProduct(newProduct) {
-    //converting data to FORM DATA
+    // converting data to FORM DATA
     const formData = new FormData();
 
     // tslint:disable-next-line: forin
@@ -34,5 +34,47 @@ export class AdminService {
 
   deleteProduct(productID) {
     return this.httpClient.delete(this.URL + `/api/product/${productID}`);
+  }
+
+  getSingleProduct(productID) {
+    return this.httpClient.get(this.URL + `/api/product/${productID}`);
+  }
+
+  updateProduct(product, productID) {
+    // ! first condtion both images fields are not updated and we have string for them
+    if (
+      typeof product.mainImg !== 'object' &&
+      typeof product.additionalImages[0] !== 'object'
+    ) {
+      console.log('true both are not object');
+      return this.httpClient.put(
+        this.URL + `/api/product/${productID}`,
+        product
+      );
+    } else {
+      // converting data to FORM DATA
+      const formData = new FormData();
+
+      // tslint:disable-next-line: forin
+      for (const key in product) {
+        //! TESTING KIA AESE DATA GET KAR SAKTE HE (YES)
+        // console.log(key);
+        // console.log(newProduct[key]);
+
+        if (key === 'additionalImages') {
+          // !append multilple time
+          for (let singleImg of product.additionalImages) {
+            formData.append('additionalImages', singleImg);
+          }
+        } else {
+          formData.append(key, product[key]);
+        }
+      }
+
+      return this.httpClient.put(
+        this.URL + `/api/product/${productID}`,
+        formData
+      );
+    }
   }
 }
