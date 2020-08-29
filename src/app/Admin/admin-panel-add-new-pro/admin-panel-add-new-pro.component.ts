@@ -46,9 +46,9 @@ export class AdminPanelAddNewProComponent implements OnInit {
         this.isModalOpen = true;
         this.response = res.message;
       });
-    //this.addNewProdForm.reset();
+    this.addNewProdForm.reset();
     this.mainImgPreview = null;
-    //this.additionalImagesPriviews = null;
+    this.additionalImagesPriviews = null;
   }
 
   pickMainImgHandler(event: Event) {
