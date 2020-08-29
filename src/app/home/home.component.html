@@ -1,5 +1,9 @@
 <div id="page-content" class="home-page">
-  <div class="container">
+  <!-- IF WE"RE LOADING-->
+  <app-spinner *ngIf="isLoading"></app-spinner>
+
+  <!--IF  we successfully fetch all product-->
+  <div class="container" *ngIf="!isLoading && products.length > 0">
     <div class="row">
       <div class="banner">
         <div class="col-sm-4">
@@ -17,11 +21,17 @@
       <div class="col-lg-12">
         <div class="heading"><h2>SPECIAL PRODUCTS</h2></div>
         <div class="products">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div
+            class="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+            *ngFor="let product of specialProducts"
+          >
             <div class="product">
               <div class="image">
-                <a routerLink="/"
-                  ><img src="../../assets/images/iphone.png"
+                <a routerLink="/">
+                  <img
+                    src="http://localhost:5000/{{ product.mainImg }}"
+                    width="156px"
+                    height="300px"
                 /></a>
               </div>
               <div class="buttons">
@@ -31,128 +41,26 @@
                 <a class="btn wishlist" routerLink="#"
                   ><span class="glyphicon glyphicon-heart"></span
                 ></a>
-                <a class="btn compare" routerLink="#"
-                  ><span class="glyphicon glyphicon-transfer"></span
+                <a class="btn compare" [routerLink]="['productDetails',product._id]"
+                  ><span class="glyphicon glyphicon-search"></span
                 ></a>
               </div>
               <div class="caption">
                 <div class="name">
                   <h3>
-                    <a routerLink="product.html">Aliquam erat volutpat</a>
+                    <a [routerLink]="['productDetails',product._id]">{{ product.name }}</a>
                   </h3>
                 </div>
-                <div class="price">$122<span>$98</span></div>
+                <div class="price">
+                  ${{ calculateDiscountPrice(product.price)
+                  }}<span>${{ product.price }}</span>
+                </div>
                 <div class="rating">
                   <span class="glyphicon glyphicon-star"></span
                   ><span class="glyphicon glyphicon-star"></span
                   ><span class="glyphicon glyphicon-star"></span
                   ><span class="glyphicon glyphicon-star"></span
                   ><span class="glyphicon glyphicon-star-empty"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="product">
-              <div class="image">
-                <a routerLink="product.html"
-                  ><img src="../../assets/images/galaxy-s4.jpg"
-                /></a>
-              </div>
-              <div class="buttons">
-                <a class="btn cart" routerLink="#"
-                  ><span class="glyphicon glyphicon-shopping-cart"></span
-                ></a>
-                <a class="btn wishlist" routerLink="#"
-                  ><span class="glyphicon glyphicon-heart"></span
-                ></a>
-                <a class="btn compare" routerLink="#"
-                  ><span class="glyphicon glyphicon-transfer"></span
-                ></a>
-              </div>
-              <div class="caption">
-                <div class="name">
-                  <h3>
-                    <a routerLink="product.html">Aliquam erat volutpat</a>
-                  </h3>
-                </div>
-                <div class="price">$122<span>$98</span></div>
-                <div class="rating">
-                  <span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="product">
-              <div class="image">
-                <a routerLink="product.html"
-                  ><img src="../../assets/images/galaxy-note.jpg"
-                /></a>
-              </div>
-              <div class="buttons">
-                <a class="btn cart" routerLink="#"
-                  ><span class="glyphicon glyphicon-shopping-cart"></span
-                ></a>
-                <a class="btn wishlist" routerLink="#"
-                  ><span class="glyphicon glyphicon-heart"></span
-                ></a>
-                <a class="btn compare" routerLink="#"
-                  ><span class="glyphicon glyphicon-transfer"></span
-                ></a>
-              </div>
-              <div class="caption">
-                <div class="name">
-                  <h3>
-                    <a routerLink="product.html">Aliquam erat volutpat</a>
-                  </h3>
-                </div>
-                <div class="price">$122<span>$98</span></div>
-                <div class="rating">
-                  <span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="product">
-              <div class="image">
-                <a routerLink="product.html"
-                  ><img src="../../assets/images/Z1.png"
-                /></a>
-              </div>
-              <div class="buttons">
-                <a class="btn cart" routerLink="#"
-                  ><span class="glyphicon glyphicon-shopping-cart"></span
-                ></a>
-                <a class="btn wishlist" routerLink="#"
-                  ><span class="glyphicon glyphicon-heart"></span
-                ></a>
-                <a class="btn compare" routerLink="#"
-                  ><span class="glyphicon glyphicon-transfer"></span
-                ></a>
-              </div>
-              <div class="caption">
-                <div class="name">
-                  <h3>
-                    <a routerLink="product.html">Aliquam erat volutpat</a>
-                  </h3>
-                </div>
-                <div class="price">$122<span>$98</span></div>
-                <div class="rating">
-                  <span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span>
                 </div>
               </div>
             </div>
@@ -174,11 +82,17 @@
       <div class="col-lg-12">
         <div class="heading"><h2>FEATURED PRODUCTS</h2></div>
         <div class="products">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div
+            class="col-lg-3 col-md-3 col-sm-6 col-xs-12"
+            *ngFor="let product of featuredProducts"
+          >
             <div class="product">
               <div class="image">
-                <a routerLink="product.html"
-                  ><img src="../../assets/images/iphone.png"
+                <a [routerLink]="['productDetails',product._id]"
+                  ><img
+                    src="http://localhost:5000/{{ product.mainImg }}"
+                    width="156px"
+                    height="300px"
                 /></a>
               </div>
               <div class="buttons">
@@ -188,128 +102,26 @@
                 <a class="btn wishlist" routerLink="#"
                   ><span class="glyphicon glyphicon-heart"></span
                 ></a>
-                <a class="btn compare" routerLink="#"
-                  ><span class="glyphicon glyphicon-transfer"></span
+                <a class="btn compare" [routerLink]="['productDetails',product._id]"
+                  ><span class="glyphicon glyphicon-search"></span
                 ></a>
               </div>
               <div class="caption">
                 <div class="name">
                   <h3>
-                    <a routerLink="product.html">Aliquam erat volutpat</a>
+                    <a [routerLink]="['productDetails',product._id]">{{ product.name }}</a>
                   </h3>
                 </div>
-                <div class="price">$122<span>$98</span></div>
+                <div class="price">
+                  ${{ calculateDiscountPrice(product.price)
+                  }}<span>${{ product.price }}</span>
+                </div>
                 <div class="rating">
                   <span class="glyphicon glyphicon-star"></span
                   ><span class="glyphicon glyphicon-star"></span
                   ><span class="glyphicon glyphicon-star"></span
                   ><span class="glyphicon glyphicon-star"></span
                   ><span class="glyphicon glyphicon-star-empty"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="product">
-              <div class="image">
-                <a routerLink="product.html"
-                  ><img src="../../assets/images/galaxy-s4.jpg"
-                /></a>
-              </div>
-              <div class="buttons">
-                <a class="btn cart" routerLink="#"
-                  ><span class="glyphicon glyphicon-shopping-cart"></span
-                ></a>
-                <a class="btn wishlist" routerLink="#"
-                  ><span class="glyphicon glyphicon-heart"></span
-                ></a>
-                <a class="btn compare" routerLink="#"
-                  ><span class="glyphicon glyphicon-transfer"></span
-                ></a>
-              </div>
-              <div class="caption">
-                <div class="name">
-                  <h3>
-                    <a routerLink="product.html">Aliquam erat volutpat</a>
-                  </h3>
-                </div>
-                <div class="price">$122<span>$98</span></div>
-                <div class="rating">
-                  <span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="product">
-              <div class="image">
-                <a routerLink="product.html"
-                  ><img src="../../assets/images/galaxy-note.jpg"
-                /></a>
-              </div>
-              <div class="buttons">
-                <a class="btn cart" routerLink="#"
-                  ><span class="glyphicon glyphicon-shopping-cart"></span
-                ></a>
-                <a class="btn wishlist" routerLink="#"
-                  ><span class="glyphicon glyphicon-heart"></span
-                ></a>
-                <a class="btn compare" routerLink="#"
-                  ><span class="glyphicon glyphicon-transfer"></span
-                ></a>
-              </div>
-              <div class="caption">
-                <div class="name">
-                  <h3>
-                    <a routerLink="product.html">Aliquam erat volutpat</a>
-                  </h3>
-                </div>
-                <div class="price">$122<span>$98</span></div>
-                <div class="rating">
-                  <span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span
-                  ><span class="glyphicon glyphicon-star-empty"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="product">
-              <div class="image">
-                <a routerLink="product.html"
-                  ><img src="../../assets/images/Z1.png"
-                /></a>
-              </div>
-              <div class="buttons">
-                <a class="btn cart" routerLink="#"
-                  ><span class="glyphicon glyphicon-shopping-cart"></span
-                ></a>
-                <a class="btn wishlist" routerLink="#"
-                  ><span class="glyphicon glyphicon-heart"></span
-                ></a>
-                <a class="btn compare" routerLink="#"
-                  ><span class="glyphicon glyphicon-transfer"></span
-                ></a>
-              </div>
-              <div class="caption">
-                <div class="name">
-                  <h3>
-                    <a routerLink="product.html">Aliquam erat volutpat</a>
-                  </h3>
-                </div>
-                <div class="price">$122<span>$98</span></div>
-                <div class="rating">
-                  <span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span
-                  ><span class="glyphicon glyphicon-star"></span>
                 </div>
               </div>
             </div>
