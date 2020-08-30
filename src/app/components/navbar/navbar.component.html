@@ -6,7 +6,8 @@
       </div>
       <div class="col-xs-6">
         <ul class="top-link">
-          <li><a routerLink="/userLogOrSing"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+          <li *ngIf="!isAuthenticated"><a routerLink="/userLogOrSing"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+          <li *ngIf="isAuthenticated" (click)="logout()"><a ><span class="glyphicon glyphicon-user"></span> Logout</a></li>
           <li><a routerLink="/contactus"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
         </ul>
       </div>

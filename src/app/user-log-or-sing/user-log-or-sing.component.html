@@ -1,12 +1,13 @@
 <div id="page-content" class="single-page">
-   <!-- IF WE"RE LOADING-->
-   <app-spinner *ngIf="isLoading"></app-spinner>
+  <!-- IF WE"RE LOADING-->
+  <app-spinner *ngIf="isLoading"></app-spinner>
 
-   <app-modal [isModalOpen]="isModalOpen" (toggleModalOutput)="closeModal()">
+  <!-- If we want to show any kind of message -->
+  <app-modal [isModalOpen]="isModalOpen" (toggleModalOutput)="closeModal()">
     <span class="children">{{ responseMessage }} </span>
   </app-modal>
 
-   <!-- if we're nod loading-->
+  <!-- if we're nod loading-->
   <div class="container" *ngIf="!isLoading">
     <div class="row">
       <div class="col-lg-12">
