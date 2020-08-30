@@ -1,3 +1,4 @@
+import { UserService } from './../Services/User/user.service';
 import { UserInputValidation } from './../components/Util/userInputValidation';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,9 +11,12 @@ import { printMessage } from '../components/Util/printMessageConsole.js';
   styleUrls: ['./user-log-or-sing.component.css'],
 })
 export class UserLogOrSingComponent implements OnInit {
-  constructor() {}
+  constructor(private userService: UserService) {}
   loginForm: FormGroup;
   singupForm: FormGroup;
+  public isLoading = false;
+  public responseMessage = '';
+  public isModalOpen = false;
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -20,7 +24,7 @@ export class UserLogOrSingComponent implements OnInit {
         Validators.required,
         UserInputValidation.isEmail,
       ]),
-      passowrd: new FormControl(null, [
+      password: new FormControl(null, [
         Validators.required,
         UserInputValidation.isPassword,
       ]),
@@ -58,8 +62,19 @@ export class UserLogOrSingComponent implements OnInit {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password,
     };
-    //TODO now call service and send this obj
 
+    // spinner
+    this.isLoading = true;
+    // calling the http service
+
+    this.userService.login(tempUser).subscribe((res: any) => {
+      console.log(res);
+      this.responseMessage = res.message;
+      this.isLoading = false;
+      this.isModalOpen = true; // opeing the model
+    });
+
+    // reseting the form
     this.loginForm.reset();
   }
 
@@ -73,7 +88,21 @@ export class UserLogOrSingComponent implements OnInit {
       phone: this.singupForm.value.phone,
       gender: this.singupForm.value.gender,
     };
-    //TODO now call service and send this obj
+
+    // spinner
+    this.isLoading = true;
+    // calling the service
+    this.userService.singup(tempUser).subscribe((res: any) => {
+      console.log(res);
+      this.responseMessage = res.message;
+      this.isLoading = false;
+      this.isModalOpen = true; // opeing the model
+    });
+    // TODO now call service and send this obj
     this.singupForm.reset();
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 }

@@ -1,5 +1,13 @@
 <div id="page-content" class="single-page">
-  <div class="container">
+   <!-- IF WE"RE LOADING-->
+   <app-spinner *ngIf="isLoading"></app-spinner>
+
+   <app-modal [isModalOpen]="isModalOpen" (toggleModalOutput)="closeModal()">
+    <span class="children">{{ responseMessage }} </span>
+  </app-modal>
+
+   <!-- if we're nod loading-->
+  <div class="container" *ngIf="!isLoading">
     <div class="row">
       <div class="col-lg-12">
         <ul class="breadcrumb">
@@ -43,7 +51,7 @@
           </div>
           <div class="form-group">
             <input
-              formControlName="passowrd"
+              formControlName="password"
               name="password"
               type="password"
               class="form-control"
@@ -55,9 +63,9 @@
             <div
               class="alert alert-danger"
               *ngIf="
-                loginForm.get('passowrd').touched &&
-                !loginForm.get('passowrd').valid &&
-                loginForm.get('passowrd').errors.isPassword
+                loginForm.get('password').touched &&
+                !loginForm.get('password').valid &&
+                loginForm.get('password').errors.isPassword
               "
             >
               <strong>Warning!</strong> password format can b number and
