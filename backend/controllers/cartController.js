@@ -7,11 +7,12 @@ exports.addProductInCart = async (req, res, next) => {
   let resultOfAddProd;
   const testBody = req.body;
   console.log(testBody);
-  const { orderProducts, totalPrice } = req.body; // extracting the props from obj
+  const { orderProducts,userID, totalPrice } = req.body; // extracting the props from obj
 
   //creating the cart obj and adding all the value
   const tempCart = new Cart({
     orderProducts,
+    userID,
     totalPrice,
   });
 

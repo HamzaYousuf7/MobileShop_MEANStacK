@@ -9,9 +9,9 @@ const cartSchema = new mongoose.Schema({
       price: { type: Number, required: true },
       availableColor: { type: String, required: true },
       quantity: { type: Number, required: true },
-      userID: { type: String, required: true },
     },
   ],
+  userID: { type: String, required: true },
   totalPrice: { type: Number, required: true },
 });
 

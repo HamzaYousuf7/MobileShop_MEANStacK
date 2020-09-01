@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class UserService {
   private token;
   public responseMessage = '';
+  public userID;
   public isError = false;
   private tokenTimer;
   public isAuthenticated = false;
@@ -19,10 +20,11 @@ export class UserService {
   login(loginInfo) {
     this.httpClient.post(this.URL + `/login`, loginInfo).subscribe(
       (res: any) => {
-        console.log(res);
+        console.log('LOGIN PE KIA RESPONSE ', res);
         const expiresInDuration = res.expiresIn;
         this.setAuthTimer(expiresInDuration);
         this.token = res.token;
+        this.userID = res.userID;
         this.isError = false;
         this.responseMessage = res.message;
         this.isAuthenticated = true;
@@ -32,7 +34,7 @@ export class UserService {
           now.getTime() + expiresInDuration * 1000
         );
         console.log('WHAT TIME', expirationDate);
-        this.saveAuthData(res.token, expirationDate);
+        this.saveAuthData(res.token, expirationDate, this.userID);
       },
       (error) => {
         console.log('error occur when try tp login', error.error.message);
@@ -48,10 +50,11 @@ export class UserService {
       (res: any) => {
         this.token = res.token;
         this.responseMessage = res.message;
+        this.userID = res.userID;
         this.isAuthenticated = true;
         this.authStatusListener.next(true);
         this.isError = false;
-        //local storage and time calculation for login validitiy
+        // local storage and time calculation for login validitiy
         const expiresInDuration = res.expiresIn;
         this.setAuthTimer(expiresInDuration);
 
@@ -60,7 +63,7 @@ export class UserService {
           now.getTime() + expiresInDuration * 1000
         );
         console.log('WHAT TIME', expirationDate);
-        this.saveAuthData(res.token, expirationDate);
+        this.saveAuthData(res.token, expirationDate, this.userID);
       },
       (error) => {
         console.log('error occur when try tp login', error.error.message);
@@ -71,35 +74,40 @@ export class UserService {
     );
   }
 
-  private saveAuthData(token, expirationDate: Date) {
+  private saveAuthData(token, expirationDate: Date, userID) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
+    localStorage.setItem('userID', userID);
   }
   private clearAuthData() {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
+    localStorage.removeItem('userID');
   }
 
   logout() {
     this.token = null;
+    this.userID = null;
     this.isAuthenticated = false;
     this.responseMessage = '';
     clearTimeout(this.tokenTimer);
     this.authStatusListener.next(false);
-    this.clearAuthData(); //cleaing local storage
+    this.clearAuthData(); // cleaing local storage
   }
 
   private getAuthData() {
     const token = localStorage.getItem('token');
+    const userID = localStorage.getItem('userID');
     const expidationDateLocal = localStorage.getItem('expiration');
 
-    if (!token || !expidationDateLocal) {
+    if (!token || !expidationDateLocal || !userID) {
       return;
     } // if any of these does not exist
 
     return {
       token,
       expirationDate: new Date(expidationDateLocal),
+      userID,
     };
   }
 
@@ -115,6 +123,7 @@ export class UserService {
 
     if (expiresIn > 0) {
       this.token = authInformation.token;
+      this.userID = authInformation.userID;
       this.authStatusListener.next(true);
       this.isAuthenticated = true;
       console.log('what we\'re geeting ', expiresIn / 1000);
