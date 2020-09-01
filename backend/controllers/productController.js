@@ -15,6 +15,7 @@ exports.getAllProducts = async (req, res, next) => {
   const pageSize = +req.query.pageSize;
   const currentPage = +req.query.currentPage;
   let isHomePage = req.query.isHomePage;
+  const isAdmin = req.query.isAdmin;
 
   //getting the max count of products collection
   try {
@@ -34,6 +35,8 @@ exports.getAllProducts = async (req, res, next) => {
         .limit(pageSize);
     } else if (isHomePage) {
       fetchProducts = await Product.find().limit(8);
+    } else if (isAdmin) {
+      fetchProducts = await Product.find();
     }
   } catch (error) {
     printMessage("error when try fetch all the product ", error);
