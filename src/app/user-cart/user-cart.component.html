@@ -8,85 +8,78 @@
         </ul>
       </div>
     </div>
-    <div class="row">
-      <div class="product well">
-        <div class="col-md-3">
-          <div class="image">
-            <img src="../../assets/images/galaxy-note.jpg" />
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="caption">
-            <div class="name"><h3><a routerLink="/products">Aliquam erat volutpat</a></h3></div>
-            <div class="info">
-              <ul>
-                <li>Brand: text</li>
-                <li>ID: 0122222</li>
-              </ul>
+    <div *ngIf="cartProduct.length > 0">
+      <div class="row" *ngFor="let product of cartProduct">
+        <div class="product well">
+          <div class="col-md-3">
+            <div class="image">
+              <img
+                src="http://localhost:5000/{{ product.mainImg }}"
+                width="165px"
+                height="300px"
+              />
             </div>
-            <div class="price">$122<span>$98</span></div>
-            <label>Qty: </label> <input class="form-inline quantity" type="text" value="1"><a routerLink="#" class="btn btn-2 ">Update</a>
-            <hr>
-            <a routerLink="#" class="btn btn-default pull-right">REMOVE</a>
           </div>
-        </div>
-        <div class="clear"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="product well">
-        <div class="col-md-3">
-          <div class="image">
-            <img src="../../assets/images/Z1.png" />
-          </div>
-        </div>
-        <div class="col-md-9">
-          <div class="caption">
-            <div class="name"><h3><a routerLink="product.html">Aliquam erat volutpat</a></h3></div>
-            <div class="info">
-              <ul>
-                <li>Brand: text</li>
-                <li>ID: 0122222</li>
-              </ul>
+          <div class="col-md-9">
+            <div class="caption">
+              <div class="name">
+                <h3>
+                  <a routerLink="/products">{{ product.name }}</a>
+                </h3>
+              </div>
+              <div class="info">
+                <ul>
+                  <li>Brand: {{ product.brandName }}</li>
+                  <li>ID: {{ product._id }}</li>
+                </ul>
+              </div>
+              <div class="price">
+                ${{ product.price - 100 }}<span>${{ product.price }}</span>
+              </div>
+              <label>Qty: </label> <span>{{ product.quantity }}</span>
             </div>
-            <div class="price">$122<span>$98</span></div>
-            <label>Qty: </label> <input class="form-inline quantity" type="text" value="1"><a routerLink="#" class="btn btn-2 ">Update</a>
-            <hr>
-            <a routerLink="#" class="btn btn-default pull-right">REMOVE</a>
           </div>
         </div>
-        <div class="clear"></div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 col-md-offset-8 ">
-        <h1><a routerLink="#" class="btn btn-1">Continue To Shopping</a></h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="pricedetails">
+
+      <div class="row">
         <div class="col-md-4 col-md-offset-8">
-          <table>
-            <h6>Price Details</h6>
-            <tr>
-              <td>Total</td>
-              <td>350.00</td>
-            </tr>
-            <tr>
-              <td>Discount</td>
-              <td>-----</td>
-            </tr>
-            <tr>
-              <td>Delivery Charges</td>
-              <td>100.00</td>
-            </tr>
-            <tr style="border-top: 1px solid #333">
-              <td><h5>TOTAL</h5></td>
-              <td>400.00</td>
-            </tr>
-          </table>
-          <h1><a routerLink="#" class="btn btn-1">Checkout</a></h1>
+          <h1>
+            <a routerLink="/products" class="btn btn-1">Continue To Shopping</a>
+          </h1>
         </div>
+      </div>
+      <div class="row">
+        <div class="pricedetails">
+          <div class="col-md-4 col-md-offset-8">
+            <table>
+              <h6>Price Details</h6>
+              <tr>
+                <td>Total</td>
+                <td>${{ totalPrice }}</td>
+              </tr>
+              <tr>
+                <td>Discount</td>
+                <td>-----</td>
+              </tr>
+              <tr>
+                <td>Delivery Charges</td>
+                <td>100.00</td>
+              </tr>
+              <tr style="border-top: 1px solid #333">
+                <td><h5>TOTAL</h5></td>
+                <td>${{ totalPrice + 100 }}</td>
+              </tr>
+            </table>
+            <h1><a (click)="placeOrder()" class="btn btn-1">Checkout</a></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END OF USER CART -->
+    <div class="container" *ngIf="cartProduct.length <= 0">
+      <div class="alert alert-info">
+        <strong>Info!</strong> You havent selected any thing yet
       </div>
     </div>
   </div>
