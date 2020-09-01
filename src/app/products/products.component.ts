@@ -42,6 +42,30 @@ export class ProductsComponent implements OnInit {
     this.getAllProducts();
   }
 
+  addToCart(productID) {
+    const tempProduct = this.allProducts.find((p) => p._id === productID);
+    const {
+      _id,
+      name,
+      brandName,
+      price,
+      mainImg,
+      availableColor,
+    } = tempProduct; // extracting the property we need from the obj
+
+    // calling the service
+    this.productsService.addProductInCart({
+      _id,
+      name,
+      brandName,
+      price,
+      mainImg,
+      availableColor,
+      quantity: 1,
+    });
+  }
+
+
   calculateDiscountPrice(orgPrice) {
     return orgPrice - 100;
   }

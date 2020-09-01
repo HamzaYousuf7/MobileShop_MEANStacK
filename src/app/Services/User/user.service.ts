@@ -1,18 +1,18 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class UserService {
   private token;
-  public responseMessage = "";
+  public responseMessage = '';
   public isError = false;
   private tokenTimer;
   public isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
-  private URL = "http://localhost:5000/api/user";
+  private URL = 'http://localhost:5000/api/user';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -31,12 +31,11 @@ export class UserService {
         const expirationDate = new Date(
           now.getTime() + expiresInDuration * 1000
         );
-        console.log("WHAT TIME", expirationDate);
+        console.log('WHAT TIME', expirationDate);
         this.saveAuthData(res.token, expirationDate);
-
       },
       (error) => {
-        console.log("error occur when try tp login", error.error.message);
+        console.log('error occur when try tp login', error.error.message);
         this.isError = true;
         this.responseMessage = error.error.message;
         this.authStatusListener.next(false);
@@ -60,12 +59,11 @@ export class UserService {
         const expirationDate = new Date(
           now.getTime() + expiresInDuration * 1000
         );
-        console.log("WHAT TIME", expirationDate);
+        console.log('WHAT TIME', expirationDate);
         this.saveAuthData(res.token, expirationDate);
-
       },
       (error) => {
-        console.log("error occur when try tp login", error.error.message);
+        console.log('error occur when try tp login', error.error.message);
         this.isError = true;
         this.responseMessage = error.error.message;
         this.authStatusListener.next(false);
@@ -74,26 +72,26 @@ export class UserService {
   }
 
   private saveAuthData(token, expirationDate: Date) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("expiration", expirationDate.toISOString());
+    localStorage.setItem('token', token);
+    localStorage.setItem('expiration', expirationDate.toISOString());
   }
   private clearAuthData() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("expiration");
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
   }
 
   logout() {
     this.token = null;
-    this.isAuthenticated = false
-    this.responseMessage = "";
+    this.isAuthenticated = false;
+    this.responseMessage = '';
     clearTimeout(this.tokenTimer);
     this.authStatusListener.next(false);
     this.clearAuthData(); //cleaing local storage
   }
 
   private getAuthData() {
-    const token = localStorage.getItem("token");
-    const expidationDateLocal = localStorage.getItem("expiration");
+    const token = localStorage.getItem('token');
+    const expidationDateLocal = localStorage.getItem('expiration');
 
     if (!token || !expidationDateLocal) {
       return;
@@ -119,7 +117,7 @@ export class UserService {
       this.token = authInformation.token;
       this.authStatusListener.next(true);
       this.isAuthenticated = true;
-      console.log("what we're geeting ",expiresIn/1000)
+      console.log('what we\'re geeting ', expiresIn / 1000);
       this.setAuthTimer(expiresIn / 1000);
     }
   }
