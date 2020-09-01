@@ -35,7 +35,7 @@
                 /></a>
               </div>
               <div class="buttons">
-                <a class="btn cart" routerLink="#"
+                <a class="btn cart" (click)="addToCart(product._id)"
                   ><span class="glyphicon glyphicon-shopping-cart"></span
                 ></a>
                 <a class="btn wishlist" routerLink="#"
@@ -96,7 +96,7 @@
                 /></a>
               </div>
               <div class="buttons">
-                <a class="btn cart" routerLink="#"
+                <a class="btn cart" (click)="addToCart(product._id)"
                   ><span class="glyphicon glyphicon-shopping-cart"></span
                 ></a>
                 <a class="btn wishlist" routerLink="#"
