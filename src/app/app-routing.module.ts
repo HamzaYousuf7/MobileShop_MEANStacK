@@ -13,7 +13,7 @@ import { ProductsComponent } from './products/products.component';
 import { MoreStuffComponent } from './components/more-stuff/more-stuff.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
-
+import { AuthAdminGuard } from './authAdmin.guard';
 
 // Defining all the path
 const routes: Routes = [
@@ -25,11 +25,20 @@ const routes: Routes = [
   { path: 'userLogOrSing', component: UserLogOrSingComponent },
   { path: 'moreStuff', component: MoreStuffComponent },
   { path: 'admin/login', component: LoginComponent }, // !admin route start
-  { path: 'admin/showAllProducts', component: AdminPanelShowComponent },
-  { path: 'admin/addNewProduct', component: AdminPanelAddNewProComponent },
+  {
+    path: 'admin/showAllProducts',
+    component: AdminPanelShowComponent,
+    canActivate: [AuthAdminGuard],
+  },
+  {
+    path: 'admin/addNewProduct',
+    component: AdminPanelAddNewProComponent,
+    canActivate: [AuthAdminGuard],
+  },
   {
     path: 'admin/updateProduct/:productID',
     component: AdminPanelUpdateProdComponent,
+    canActivate: [AuthAdminGuard],
   },
   { path: '**', component: PageNotFoundComponent }, // !404 route
 ];
@@ -37,5 +46,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [AuthAdminGuard],
 })
 export class AppRoutingModule {}
