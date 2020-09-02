@@ -2,9 +2,11 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
 
 <div class="container" *ngIf="!isLoading">
+
   <app-modal [isModalOpen]="isModalOpen" (toggleModalOutput)="closeModal()">
     <span class="children">{{ responseMessage }} </span>
   </app-modal>
+
   <h2>Admin Login form</h2>
   <form
     #adminLoginForm="ngForm"

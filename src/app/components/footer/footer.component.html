@@ -20,9 +20,13 @@
             <li *ngIf="!isAdminAuth">
               <a routerLink="/admin/login">ADMIN (LOGIN)</a>
             </li>
-            <li *ngIf="isAdminAuth">
-              <a (click)="logout()">ADMIN (LOGOUT)</a>
-            </li>
+            <div *ngIf="isAdminAuth">
+              <li>
+                <a (click)="logout()">ADMIN (LOGOUT)</a>
+              </li>
+              <li><a routerLink="/admin/showAllProducts">ADMIN (SHOW ALL PRODUCT)</a></li>
+              <li><a routerLink="/admin/addNewProduct">ADMIN (ADD PRODUCT)</a></li>
+            </div>
           </ul>
         </div>
         <div class="col-md-3 col-footer footer-3">
