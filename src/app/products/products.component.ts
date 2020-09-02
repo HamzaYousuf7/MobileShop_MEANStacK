@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   public isLoading = false;
 
   ngOnInit() {
-    //init fetching all product
+    // init fetching all product
     this.getAllProducts();
   }
 

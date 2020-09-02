@@ -1,17 +1,17 @@
-import { UserService } from "./../User/user.service";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { UserService } from './../User/user.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ProductsService {
   constructor(
     private httpClient: HttpClient,
     private userService: UserService
   ) {}
-  private URL = "http://localhost:5000/api/product";
+  private URL = 'http://localhost:5000/api/product';
   public orderProducts = [];
   public totalPrice = 0;
 
@@ -21,7 +21,7 @@ export class ProductsService {
   }>();
 
   fetchHomeCompProduct() {
-    return this.httpClient.get(this.URL + "?isHomePage=true");
+    return this.httpClient.get(this.URL + '?isHomePage=true');
   }
 
   fetchSingleProduct(productID) {
@@ -44,7 +44,7 @@ export class ProductsService {
     // TODO sernario no 1 product not added senario no 2 product already added
     // checking if we already have this product
     const isExist = this.orderProducts.find((p) => p._id === product._id);
-    console.log("is exist", isExist);
+    console.log('is exist', isExist);
     if (isExist) {
       // if that product does exist
       const tempArr = [...this.orderProducts];
@@ -61,7 +61,7 @@ export class ProductsService {
     // adding price to total price
     this.totalPrice = this.totalPrice + (product.price - 100); // because this is the discount price
     console.log(
-      "final result what is inside the order array",
+      'final result what is inside the order array',
       this.orderProducts,
       this.totalPrice
     );
@@ -86,13 +86,13 @@ export class ProductsService {
       };
     });
 
-    console.log("final obj for cart", {
+    console.log('final obj for cart', {
       userID,
       orderProducts: updateFieldsArr,
       totalPrice: this.totalPrice,
     });
 
-    return this.httpClient.post("http://localhost:5000/api/cart/placeOrder", {
+    return this.httpClient.post('http://localhost:5000/api/cart/placeOrder', {
       userID,
       orderProducts: updateFieldsArr,
       totalPrice: this.totalPrice,

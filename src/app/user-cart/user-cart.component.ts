@@ -1,11 +1,11 @@
-import { UserService } from "./../Services/User/user.service";
-import { ProductsService } from "./../Services/Products/products.service";
-import { Component, OnInit } from "@angular/core";
+import { UserService } from './../Services/User/user.service';
+import { ProductsService } from './../Services/Products/products.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-user-cart",
-  templateUrl: "./user-cart.component.html",
-  styleUrls: ["./user-cart.component.css"],
+  selector: 'app-user-cart',
+  templateUrl: './user-cart.component.html',
+  styleUrls: ['./user-cart.component.css'],
 })
 export class UserCartComponent implements OnInit {
   constructor(
@@ -22,13 +22,13 @@ export class UserCartComponent implements OnInit {
     this.isAuthen =  this.userService.isAuthenticated;
 
     this.productsService.getUpdatedOrderList().subscribe((temp) => {
-      console.log("what are we getting in the cart arr", temp);
+      console.log('what are we getting in the cart arr', temp);
       this.cartProduct = temp.orderProducts;
       this.totalPrice = temp.totalPrice;
       console.log(this.totalPrice);
     });
 
-    //subscribing to the subject
+    // subscribing to the subject
     this.userService.getAuthStatusListner().subscribe((isAuthenticated) => {
       this.isAuthen = isAuthenticated;
     });
@@ -36,7 +36,7 @@ export class UserCartComponent implements OnInit {
 
   placeOrder() {
     this.productsService.placeYourOrder().subscribe((res) => {
-      console.log("what is the response of cat place", res);
+      console.log('what is the response of cat place', res);
     });
   }
 }

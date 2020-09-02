@@ -22,6 +22,7 @@ import { SpinnerComponent } from './components/UI/spinner/spinner.component';
 import { AdminPanelShowComponent } from './Admin/admin-panel-show/admin-panel-show.component';
 import { AdminPanelAddNewProComponent } from './Admin/admin-panel-add-new-pro/admin-panel-add-new-pro.component';
 import { AdminPanelUpdateProdComponent } from './Admin/admin-panel-update-prod/admin-panel-update-prod.component';
+import { LoginComponent } from './Admin/login/login.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AdminPanelUpdateProdComponent } from './Admin/admin-panel-update-prod/a
     AdminPanelShowComponent,
     AdminPanelAddNewProComponent,
     AdminPanelUpdateProdComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [],

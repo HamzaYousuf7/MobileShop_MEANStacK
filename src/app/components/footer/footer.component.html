@@ -16,7 +16,13 @@
             <li><a routerLink="/moreStuff">Delivery Information</a></li>
             <li><a routerLink="/moreStuff">Privacy Policy</a></li>
             <li><a routerLink="/moreStuff">Terms & Conditions</a></li>
-            <li><a routerLink="contactus">Contact Us</a></li>
+            <li><a routerLink="/contactus">Contact Us</a></li>
+            <li *ngIf="!isAdminAuth">
+              <a routerLink="/admin/login">ADMIN (LOGIN)</a>
+            </li>
+            <li *ngIf="isAdminAuth">
+              <a (click)="logout()">ADMIN (LOGOUT)</a>
+            </li>
           </ul>
         </div>
         <div class="col-md-3 col-footer footer-3">
@@ -53,11 +59,17 @@
       <div class="row">
         <div class="col-md-6">
           Your Store © 20xx -
-          <a routerLink="http://www.365bootstrap.com" rel="nofollow" target="_blank"
+          <a
+            routerLink="http://www.365bootstrap.com"
+            rel="nofollow"
+            target="_blank"
             >Ecommerce Themes</a
           >
           Designed by
-          <a routerLink="http://www.365bootstrap.com" rel="nofollow" target="_blank"
+          <a
+            routerLink="http://www.365bootstrap.com"
+            rel="nofollow"
+            target="_blank"
             >365BOOTSTRAP</a
           >
         </div>

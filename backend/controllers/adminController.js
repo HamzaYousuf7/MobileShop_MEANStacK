@@ -75,6 +75,7 @@ exports.adminLogin = async (req, res, next) => {
 };
 
 exports.adminSingup = async (req, res, next) => {
+  /*
   //INI VAR
   let resultOfSave, isEmailUnique, hashPassowrd, token;
 
@@ -165,5 +166,10 @@ exports.adminSingup = async (req, res, next) => {
   res.status(200).json({
     message: "Created new admin Successfully",
     token,
+  });*/
+  //! everything is working but now i dont want any new admin
+  res.status(200).json({
+    message:
+      "Sorry, you can not create new admin right now. Please contact your developer",
   });
 };

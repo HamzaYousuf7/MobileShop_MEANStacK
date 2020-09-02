@@ -1,12 +1,12 @@
-import { ProductsService } from "./../../Services/Products/products.service";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ProductsService } from './../../Services/Products/products.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { UserService } from "./../../Services/User/user.service";
+import { UserService } from './../../Services/User/user.service';
 @Component({
-  selector: "app-navbar",
-  templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.css"],
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
   constructor(
@@ -19,12 +19,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.isAuthenticated = this.userService.isAuthenticated;
     this.userService.getAuthStatusListner().subscribe((isAuthenticated) => {
-      console.log("....?", this.userService.isAuthenticated);
+      console.log('....?', this.userService.isAuthenticated);
       this.isAuthenticated = isAuthenticated;
     });
 
-    //item count
-    this.itemCount = 0; //init it will b zeroi
+    // item count
+    this.itemCount = 0; // init it will b zeroi
     this.productsService.getUpdatedOrderList().subscribe((tempObj) => {
       this.itemCount = tempObj.orderProducts.length;
     });
@@ -32,6 +32,6 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.userService.logout();
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
   }
 }
