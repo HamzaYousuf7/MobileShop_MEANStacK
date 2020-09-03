@@ -1,6 +1,7 @@
 import { UserService } from './../Services/User/user.service';
 import { ProductsService } from './../Services/Products/products.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-cart',
@@ -10,16 +11,21 @@ import { Component, OnInit } from '@angular/core';
 export class UserCartComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
   public cartProduct;
   public totalPrice;
   public isAuthen;
+  public isLoading = false;
+  public responseMessage = '';
+  public isModalOpen = false;
+
   ngOnInit() {
     // by defult values
     this.cartProduct = this.productsService.orderProducts;
     this.totalPrice = this.productsService.totalPrice;
-    this.isAuthen =  this.userService.isAuthenticated;
+    this.isAuthen = this.userService.isAuthenticated;
 
     this.productsService.getUpdatedOrderList().subscribe((temp) => {
       console.log('what are we getting in the cart arr', temp);
@@ -35,8 +41,21 @@ export class UserCartComponent implements OnInit {
   }
 
   placeOrder() {
-    this.productsService.placeYourOrder().subscribe((res) => {
+    this.isLoading = true;
+    this.productsService.placeYourOrder().subscribe((res: any) => {
       console.log('what is the response of cat place', res);
+      this.isLoading = false;
+      this.isModalOpen = true;
+      this.responseMessage = res.message;
+      this.productsService.cleartCartData();
     });
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    // only run if we successfully login in
+    if (!this.userService.isError) {
+      this.router.navigate(['/']);
+    }
   }
 }

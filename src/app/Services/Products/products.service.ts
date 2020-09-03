@@ -98,4 +98,13 @@ export class ProductsService {
       totalPrice: this.totalPrice,
     });
   }
+
+  cleartCartData() {
+    this.orderProducts = [];
+    this.totalPrice = 0;
+    this.userCartSubject.next({
+      orderProducts: [],
+      totalPrice: 0,
+    });
+  }
 }
