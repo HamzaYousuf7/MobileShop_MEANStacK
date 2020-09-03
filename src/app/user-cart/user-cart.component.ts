@@ -28,10 +28,9 @@ export class UserCartComponent implements OnInit {
     this.isAuthen = this.userService.isAuthenticated;
 
     this.productsService.getUpdatedOrderList().subscribe((temp) => {
-      console.log('what are we getting in the cart arr', temp);
       this.cartProduct = temp.orderProducts;
       this.totalPrice = temp.totalPrice;
-      console.log(this.totalPrice);
+
     });
 
     // subscribing to the subject
@@ -43,7 +42,6 @@ export class UserCartComponent implements OnInit {
   placeOrder() {
     this.isLoading = true;
     this.productsService.placeYourOrder().subscribe((res: any) => {
-      console.log('what is the response of cat place', res);
       this.isLoading = false;
       this.isModalOpen = true;
       this.responseMessage = res.message;

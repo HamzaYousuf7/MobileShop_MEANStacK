@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.productsService.fetchHomeCompProduct().subscribe((res: any) => {
-      console.log(res);
       this.isLoading = false;
       this.products = res.products;
       this.specialProducts = this.products.slice(0, 4);

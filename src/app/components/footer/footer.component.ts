@@ -7,18 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-  constructor(private AdminService : AdminService) {}
+  constructor(private adminService: AdminService) {}
   public isAdminAuth;
   public responseMessage;
 
   ngOnInit() {
-    this.isAdminAuth = this.AdminService.isAdminAuth;
-    this.AdminService.getUpdateIsAuth().subscribe((isAuth) => {
+    this.isAdminAuth = this.adminService.isAdminAuth;
+    this.adminService.getUpdateIsAuth().subscribe((isAuth) => {
       this.isAdminAuth = isAuth;
     });
   }
 
   logout() {
-    this.AdminService.logout();
+    this.adminService.logout();
   }
 }

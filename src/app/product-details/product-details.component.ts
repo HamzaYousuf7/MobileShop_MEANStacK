@@ -19,15 +19,16 @@ export class ProductDetailsComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('productID')) {
         const productID = paramMap.get('productID');
-        this.productsService.fetchSingleProduct(productID).subscribe((res:any) => {
-          console.log(res.product);
-          this.fetchSingleProd = res.product;
-        });
+        this.productsService
+          .fetchSingleProduct(productID)
+          .subscribe((res: any) => {
+            this.fetchSingleProd = res.product;
+          });
       }
     });
   }
 
-  discountPrice(orgPrice){
-    return (orgPrice - 100)
+  discountPrice(orgPrice) {
+    return orgPrice - 100;
   }
 }

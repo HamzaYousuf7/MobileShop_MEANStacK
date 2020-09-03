@@ -28,7 +28,6 @@ export class ProductsComponent implements OnInit {
       .fetchAllProducts(this.pageSize, this.currentPage)
       .subscribe((res: any) => {
         this.isLoading = false;
-        console.log('[product comp me res kia a rha he]', res);
         this.allProducts = res.products;
         this.maxProductsCount = res.maxProductCount;
         this.secOne = this.allProducts.slice(0, 3);
@@ -38,7 +37,6 @@ export class ProductsComponent implements OnInit {
   }
   paginationHandler(page) {
     this.currentPage = page;
-    console.log(page);
     this.getAllProducts();
   }
 

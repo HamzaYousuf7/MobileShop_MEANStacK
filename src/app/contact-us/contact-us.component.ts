@@ -10,10 +10,10 @@ import { printMessage } from '../components/Util/printMessageConsole.js';
 })
 export class ContactUsComponent implements OnInit {
   constructor() {}
-  //var dec
+  // var dec
   public contactForm: FormGroup;
   ngOnInit() {
-    //iniz contact form
+    // iniz contact form
     this.contactForm = new FormGroup({
       name: new FormControl(null, [
         Validators.required,
@@ -33,9 +33,9 @@ export class ContactUsComponent implements OnInit {
 
   sendMessage() {
     printMessage('contact us form me kia aya', this.contactForm.value);
-    //TODO CALL HTTP AND SEND REQ
+    // TODO CALL HTTP AND SEND REQ
 
-    //!reseting the form
+    // ! reseting the form
     this.contactForm.reset();
   }
 }

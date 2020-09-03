@@ -70,7 +70,7 @@ export class UserLogOrSingComponent implements OnInit {
     this.userService.login(tempUser);
     // All the UI work listening to the status open model and showing message and starting spinner
     this.userService.getAuthStatusListner().subscribe((isAuthenticated) => {
-      console.log(isAuthenticated);
+
       if (isAuthenticated) {
         this.isLoading = false;
         this.responseMessage = this.userService.responseMessage;
@@ -104,7 +104,6 @@ export class UserLogOrSingComponent implements OnInit {
 
     // All the UI work listening to the status open model and showing message and starting spinner
     this.userService.getAuthStatusListner().subscribe((isAuthenticated) => {
-      console.log(isAuthenticated);
       if (isAuthenticated) {
         this.isLoading = false;
         this.responseMessage = this.userService.responseMessage;
@@ -121,7 +120,7 @@ export class UserLogOrSingComponent implements OnInit {
 
   closeModal() {
     this.isModalOpen = false;
-    //only run if we successfully login in
-    if(!this.userService.isError) this.router.navigate(['/']);
+    // only run if we successfully login in
+    if (!this.userService.isError) { this.router.navigate(['/']); }
   }
 }

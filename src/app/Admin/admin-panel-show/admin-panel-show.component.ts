@@ -1,10 +1,10 @@
-import { AdminService } from "./../../Services/Admin/admin.service";
-import { Component, OnInit } from "@angular/core";
+import { AdminService } from './../../Services/Admin/admin.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-admin-panel-show",
-  templateUrl: "./admin-panel-show.component.html",
-  styleUrls: ["./admin-panel-show.component.css"],
+  selector: 'app-admin-panel-show',
+  templateUrl: './admin-panel-show.component.html',
+  styleUrls: ['./admin-panel-show.component.css'],
 })
 export class AdminPanelShowComponent implements OnInit {
   constructor(private adminService: AdminService) {}
@@ -20,7 +20,7 @@ export class AdminPanelShowComponent implements OnInit {
 
   fetchAllproduct() {
     this.adminService.getAllProducts().subscribe((res: any) => {
-      console.log("when we fetch all products", res);
+      console.log('when we fetch all products', res);
       this.allProducts = res.products;
       this.isLoading = false;
     });

@@ -20,7 +20,6 @@ export class UserService {
   login(loginInfo) {
     this.httpClient.post(this.URL + `/login`, loginInfo).subscribe(
       (res: any) => {
-        console.log('LOGIN PE KIA RESPONSE ', res);
         const expiresInDuration = res.expiresIn;
         this.setAuthTimer(expiresInDuration);
         this.token = res.token;
@@ -33,11 +32,9 @@ export class UserService {
         const expirationDate = new Date(
           now.getTime() + expiresInDuration * 1000
         );
-        console.log('WHAT TIME', expirationDate);
         this.saveAuthData(res.token, expirationDate, this.userID);
       },
       (error) => {
-        console.log('error occur when try tp login', error.error.message);
         this.isError = true;
         this.responseMessage = error.error.message;
         this.authStatusListener.next(false);
@@ -62,11 +59,9 @@ export class UserService {
         const expirationDate = new Date(
           now.getTime() + expiresInDuration * 1000
         );
-        console.log('WHAT TIME', expirationDate);
         this.saveAuthData(res.token, expirationDate, this.userID);
       },
       (error) => {
-        console.log('error occur when try tp login', error.error.message);
         this.isError = true;
         this.responseMessage = error.error.message;
         this.authStatusListener.next(false);
@@ -126,7 +121,6 @@ export class UserService {
       this.userID = authInformation.userID;
       this.authStatusListener.next(true);
       this.isAuthenticated = true;
-      console.log('what we\'re geeting ', expiresIn / 1000);
       this.setAuthTimer(expiresIn / 1000);
     }
   }

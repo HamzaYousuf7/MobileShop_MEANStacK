@@ -25,13 +25,12 @@ export class AdminService {
 
     // tslint:disable-next-line: forin
     for (const key in newProduct) {
-      //! TESTING KIA AESE DATA GET KAR SAKTE HE (YES)
-      // console.log(key);
-      // console.log(newProduct[key]);
+      // ! TESTING KIA AESE DATA GET KAR SAKTE HE (YES)
+
 
       if (key === 'additionalImages') {
         // !append multilple time
-        for (let singleImg of newProduct.additionalImages) {
+        for (const singleImg of newProduct.additionalImages) {
           formData.append('additionalImages', singleImg);
         }
       } else {
@@ -55,7 +54,6 @@ export class AdminService {
       typeof product.mainImg !== 'object' &&
       typeof product.additionalImages[0] !== 'object'
     ) {
-      console.log('true both are not object');
       return this.httpClient.put(
         this.URL + `/api/product/${productID}`,
         product
@@ -66,13 +64,12 @@ export class AdminService {
 
       // tslint:disable-next-line: forin
       for (const key in product) {
-        //! TESTING KIA AESE DATA GET KAR SAKTE HE (YES)
-        // console.log(key);
-        // console.log(newProduct[key]);
+        // ! TESTING KIA AESE DATA GET KAR SAKTE HE (YES)
+
 
         if (key === 'additionalImages') {
           // !append multilple time
-          for (let singleImg of product.additionalImages) {
+          for (const singleImg of product.additionalImages) {
             formData.append('additionalImages', singleImg);
           }
         } else {
@@ -100,7 +97,6 @@ export class AdminService {
       .post(`http://localhost:5000/api/admin/login`, adminData)
       .subscribe(
         (res: any) => {
-          console.log(res);
           this.responseMessage = res.message;
           this.token = res.token;
           this.isAdminAuth = true;
@@ -108,7 +104,6 @@ export class AdminService {
           this.isAuthSubject.next(true);
         },
         (error) => {
-          console.log('error occur when admin login', error);
           this.errorMessage = error.error.message;
           this.isError = true;
           this.isAuthSubject.next(false);

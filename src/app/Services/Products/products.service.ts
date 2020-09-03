@@ -44,7 +44,6 @@ export class ProductsService {
     // TODO sernario no 1 product not added senario no 2 product already added
     // checking if we already have this product
     const isExist = this.orderProducts.find((p) => p._id === product._id);
-    console.log('is exist', isExist);
     if (isExist) {
       // if that product does exist
       const tempArr = [...this.orderProducts];
@@ -60,11 +59,7 @@ export class ProductsService {
     }
     // adding price to total price
     this.totalPrice = this.totalPrice + (product.price - 100); // because this is the discount price
-    console.log(
-      'final result what is inside the order array',
-      this.orderProducts,
-      this.totalPrice
-    );
+
     this.userCartSubject.next({
       orderProducts: this.orderProducts,
       totalPrice: this.totalPrice,
@@ -86,11 +81,7 @@ export class ProductsService {
       };
     });
 
-    console.log('final obj for cart', {
-      userID,
-      orderProducts: updateFieldsArr,
-      totalPrice: this.totalPrice,
-    });
+
 
     return this.httpClient.post('http://localhost:5000/api/cart/placeOrder', {
       userID,
